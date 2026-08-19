@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Космический полет - Битва с НЛО! 👾</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        #gameContainer {
+            position: relative;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 100, 255, 0.3);
+        }
+        
+        canvas {
+            display: block;
+            background: #000;
+            border-radius: 10px;
+            cursor: none;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 16px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        #ui div {
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        #ui .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff00;
+        }
+        
+        #ui .info {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        #ui .fire {
+            color: #ff6600;
+        }
+        
+        #ui .ufo {
+            color: #ff00ff;
+        }
+        
+        #ui .laser {
+            color: #ff0000;
+        }
+        
+        #startScreen, #gameOverScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 20;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        #startScreen h1 {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 100, 255, 0.5);
+        }
+        
+        #startScreen h2 {
+            color: #ffdd00;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        #startScreen p {
+            color: #aaa;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        #startScreen .highlight {
+            color: #ff6600;
+            font-weight: bold;
+        }
+        
+        #startScreen .start-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #00ff00, #00aa00);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            font-weight: bold;
+        }
+        
+        #startScreen .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+        
+        #gameOverScreen h1 {
+            color: #ff0000;
+            font-size: 52px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+        
+        #gameOverScreen .final-score {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+        
+        #gameOverScreen .restart-btn {
+            padding: 12px 35px;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px rgba(255, 100, 0, 0.3);
+            margin: 5px;
+            font-weight: bold;
+        }
+        
+        #gameOverScreen .restart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 100, 0, 0.5);
+        }
+        
+        #gameOverScreen .quit-btn {
+            padding: 12px 35px;
+            font-size: 20px;
+            background: linear-gradient(135deg, #666, #333);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 5px;
+            font-weight: bold;
+        }
+        
+        #gameOverScreen .quit-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 850px) {
+            #gameContainer {
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 650px) {
+            #gameContainer {
+                transform: scale(0.6);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #gameContainer {
+                transform: scale(0.45);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div id="ui">
+            <div class="score">🏆 Счет: <span id="scoreDisplay">0</span></div>
+            <div class="info">📦 Объекты: <span id="objectsDisplay">0</span></div>
+            <div class="info fire">🔥 Огненных: <span id="fireDisplay">0</span></div>
+            <div class="info ufo">👾 НЛО: <span id="ufoDisplay">0</span></div>
+            <div class="info laser">⚡ Лазеры: <span id="laserDisplay">0</span></div>
+        </div>
+        
+        <div id="startScreen">
+            <h1>🚀 КОСМИЧЕСКИЙ ПОЛЕТ</h1>
+            <h2>Уклоняйся от всех опасностей!</h2>
+            <p>👾 Враги: метеориты, камни, огненные метеориты и <span class="highlight">НЛО с лазерами</span>!</p>
+            <p style="color: #888; font-size: 14px; margin-top: 10px;">Управление: стрелки или WASD</p>
+            <button class="start-btn" id="startBtn">▶ СТАРТ</button>
+        </div>
+        
+        <div id="gameOverScreen" class="hidden">
+            <h1>💥 КАТАСТРОФА!</h1>
+            <div class="final-score">Счет: <span id="finalScore">0</span></div>
+            <div>
+                <button class="restart-btn" id="restartBtn">🔄 Играть снова</button>
+                <button class="quit-btn" id="quitBtn">✖ Выйти</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // --- Инициализация ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const WIDTH = 800;
+        const HEIGHT = 600;
+        
+        // --- DOM элементы ---
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const objectsDisplay = document.getElementById('objectsDisplay');
+        const fireDisplay = document.getElementById('fireDisplay');
+        const ufoDisplay = document.getElementById('ufoDisplay');
+        const laserDisplay = document.getElementById('laserDisplay');
+        const finalScore = document.getElementById('finalScore');
+        const startScreen = document.getElementById('startScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        
+        // --- Игровые переменные ---
+        let gameRunning = false;
+        let gameOver = false;
+        let score = 0;
+        let animFrameId = null;
+        
+        // --- Классы ---
+        class Rocket {
+            constructor() {
+                this.width = 40;
+                this.height = 60;
+                this.x = WIDTH / 2 - this.width / 2;
+                this.y = HEIGHT - 100;
+                this.speed = 5;
+                this.angle = 0;
+                this.invulnerable = false;
+                this.invulnerableTimer = 0;
+                this.trail = [];
+            }
+            
+            update(keys) {
+                if (keys['ArrowLeft'] || keys['KeyA']) {
+                    this.x -= this.speed;
+                    this.angle = -15;
+                } else if (keys['ArrowRight'] || keys['KeyD']) {
+                    this.x += this.speed;
+                    this.angle = 15;
+                } else {
+                    this.angle = 0;
+                }
+                
+                if (keys['ArrowUp'] || keys['KeyW']) {
+                    this.y -= this.speed;
+                }
+                if (keys['ArrowDown'] || keys['KeyS']) {
+                    this.y += this.speed;
+                }
+                
+                this.x = Math.max(0, Math.min(WIDTH - this.width, this.x));
+                this.y = Math.max(0, Math.min(HEIGHT - this.height, this.y));
+                
+                // Trail
+                this.trail.push({x: this.x + this.width/2, y: this.y + this.height, life: 20});
+                if (this.trail.length > 20) this.trail.shift();
+                this.trail.forEach(t => t.life--);
+                this.trail = this.trail.filter(t => t.life > 0);
+                
+                if (this.invulnerable) {
+                    this.invulnerableTimer--;
+                    if (this.invulnerableTimer <= 0) {
+                        this.invulnerable = false;
+                    }
+                }
+            }
+            
+            draw() {
+                if (this.invulnerable && Math.floor(this.invulnerableTimer / 5) % 2 === 0) {
+                    // Мигание
+                    return;
+                }
+                
+                ctx.save();
+                ctx.translate(this.x + this.width/2, this.y + this.height/2);
+                ctx.rotate(this.angle * Math.PI / 180);
+                
+                // Trail
+                this.trail.forEach(t => {
+                    const alpha = t.life / 20;
+                    ctx.beginPath();
+                    ctx.arc(t.x - this.x - this.width/2, t.y - this.y - this.height/2, 3 * alpha, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 150, 0, ${alpha * 0.5})`;
+                    ctx.fill();
+                });
+                
+                // Корпус
+                ctx.beginPath();
+                ctx.moveTo(0, -30);
+                ctx.lineTo(15, 20);
+                ctx.lineTo(5, 10);
+                ctx.lineTo(5, 30);
+                ctx.lineTo(-5, 30);
+                ctx.lineTo(-5, 10);
+                ctx.lineTo(-15, 20);
+                ctx.closePath();
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.strokeStyle = '#888';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                
+                // Иллюминатор
+                ctx.beginPath();
+                ctx.arc(0, -10, 8, 0, Math.PI * 2);
+                ctx.fillStyle = '#0066ff';
+                ctx.fill();
+                ctx.strokeStyle = '#88ccff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.arc(0, -10, 5, 0, Math.PI * 2);
+                ctx.fillStyle = '#44aaff';
+                ctx.fill();
+                
+                // Окна
+                ctx.fillStyle = '#44aaff';
+                ctx.fillRect(-12, -18, 24, 8);
+                
+                // Двигатель
+                ctx.fillStyle = '#888';
+                ctx.fillRect(-8, 28, 16, 5);
+                
+                ctx.restore();
+            }
+            
+            getRect() {
+                return {
+                    x: this.x + 5,
+                    y: this.y + 10,
+                    w: this.width - 10,
+                    h: this.height - 15
+                };
+            }
+            
+            hit() {
+                this.invulnerable = true;
+                this.invulnerableTimer = 90;
+            }
+        }
+        
+        class UFO {
+            constructor() {
+                this.width = 50;
+                this.height = 30;
+                this.x = Math.random() * (WIDTH - this.width);
+                this.y = 50 + Math.random() * (HEIGHT/2 - 50);
+                this.speedX = (Math.random() > 0.5 ? 1 : -1) * (1 + Math.random() * 1.5);
+                this.speedY = (Math.random() > 0.5 ? 1 : -1) * (0.5 + Math.random() * 0.5);
+                this.dirChangeTimer = 60 + Math.floor(Math.random() * 120);
+                this.shootTimer = 30 + Math.floor(Math.random() * 60);
+                this.rotation = 0;
+                this.rotationSpeed = (Math.random() - 0.5) * 4;
+                this.hitpoints = 3;
+                this.flashTimer = 0;
+            }
+            
+            update(rocketX, rocketY) {
+                this.dirChangeTimer--;
+                if (this.dirChangeTimer <= 0) {
+                    this.speedX = (Math.random() > 0.5 ? 1 : -1) * (1 + Math.random() * 1.5);
+                    this.speedY = (Math.random() > 0.5 ? 1 : -1) * (0.5 + Math.random() * 0.5);
+                    this.dirChangeTimer = 60 + Math.floor(Math.random() * 120);
+                }
+                
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x <= 0 || this.x >= WIDTH - this.width) {
+                    this.speedX *= -1;
+                }
+                if (this.y <= 20 || this.y >= HEIGHT/2 + 50) {
+                    this.speedY *= -1;
+                }
+                
+                this.x = Math.max(0, Math.min(WIDTH - this.width, this.x));
+                this.y = Math.max(20, Math.min(HEIGHT/2 + 50, this.y));
+                
+                this.rotation += this.rotationSpeed;
+                if (this.flashTimer > 0) this.flashTimer--;
+                
+                this.shootTimer--;
+                if (this.shootTimer <= 0) {
+                    this.shootTimer = 40 + Math.floor(Math.random() * 60);
+                    return true;
+                }
+                return false;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x + this.width/2, this.y + this.height/2);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                
+                // Купол
+                ctx.beginPath();
+                ctx.ellipse(0, -8, 15, 10, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#66ccff';
+                ctx.fill();
+                ctx.strokeStyle = '#88ddff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.ellipse(0, -6, 10, 7, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#99ddff';
+                ctx.fill();
+                
+                // Корпус верхний
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 25, 8, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#b0b0c8';
+                ctx.fill();
+                ctx.stroke();
+                
+                // Корпус нижний
+                ctx.beginPath();
+                ctx.ellipse(0, 4, 23, 6, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#9696aa';
+                ctx.fill();
+                ctx.stroke();
+                
+                // Огни
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00'];
+                for (let i = 0; i < 4; i++) {
+                    const angle = i * Math.PI/2 + Math.PI/4;
+                    const x = 20 * Math.cos(angle);
+                    const y = 2 * Math.sin(angle);
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = colors[i];
+                    ctx.fill();
+                    // Свечение
+                    const glow = ctx.createRadialGradient(x, y, 0, x, y, 8);
+                    glow.addColorStop(0, colors[i] + '80');
+                    glow.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = glow;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // Линии
+                ctx.strokeStyle = '#c8c8dd';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(0, 0, 22, 0, Math.PI);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(0, 4, 20, 0, Math.PI);
+                ctx.stroke();
+                
+                ctx.restore();
+                
+                // Health
+                for (let i = 0; i < this.hitpoints; i++) {
+                    ctx.beginPath();
+                    ctx.arc(this.x + 5 + i * 8, this.y + this.height + 10, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#00ff00';
+                    ctx.fill();
+                }
+            }
+            
+            getRect() {
+                const margin = 5;
+                return {
+                    x: this.x + margin,
+                    y: this.y + margin,
+                    w: this.width - margin * 2,
+                    h: this.height - margin * 2
+                };
+            }
+            
+            hit() {
+                this.hitpoints--;
+                this.flashTimer = 10;
+                return this.hitpoints <= 0;
+            }
+        }
+        
+        class Laser {
+            constructor(x, y, targetX, targetY) {
+                this.startX = x;
+                this.startY = y;
+                this.targetX = targetX;
+                this.targetY = targetY;
+                this.progress = 0;
+                this.speed = 8;
+                this.active = true;
+                
+                const dx = targetX - x;
+                const dy = targetY - y;
+                this.angle = Math.atan2(dy, dx);
+                this.distance = Math.sqrt(dx * dx + dy * dy);
+                this.length = this.distance;
+            }
+            
+            update() {
+                this.progress += this.speed;
+                return this.progress >= this.distance;
+            }
+            
+            draw() {
+                if (!this.active || this.progress >= this.distance) return;
+                
+                const progressRatio = Math.min(1, this.progress / this.distance);
+                const currentX = this.startX + this.distance * progressRatio * Math.cos(this.angle);
+                const currentY = this.startY + this.distance * progressRatio * Math.sin(this.angle);
+                
+                // Основной луч
+                ctx.save();
+                ctx.translate(this.startX, this.startY);
+                ctx.rotate(this.angle);
+                
+                // Свечение
+                const gradient = ctx.createLinearGradient(0, 0, this.distance * progressRatio, 0);
+                gradient.addColorStop(0, 'rgba(255, 50, 50, 0)');
+                gradient.addColorStop(0.1, 'rgba(255, 50, 50, 0.8)');
+                gradient.addColorStop(0.9, 'rgba(255, 200, 50, 0.8)');
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0.2)');
+                
+                ctx.shadowColor = '#ff0000';
+                ctx.shadowBlur = 20;
+                
+                // Толстый луч
+                for (let i = 0; i < 8; i += 2) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, -2 - i);
+                    ctx.lineTo(this.distance * progressRatio, -1 - i/4);
+                    ctx.lineTo(this.distance * progressRatio, 1 + i/4);
+                    ctx.lineTo(0, 2 + i);
+                    ctx.closePath();
+                    ctx.fillStyle = `rgba(255, 50, 50, ${0.3 - i/30})`;
+                    ctx.fill();
+                }
+                
+                // Центральная линия
+                ctx.shadowBlur = 30;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(this.distance * progressRatio, 0);
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                ctx.shadowBlur = 0;
+                ctx.restore();
+                
+                // Яркая точка на конце
+                const glowRadius = 10 + 5 * (1 - progressRatio);
+                const gradient2 = ctx.createRadialGradient(currentX, currentY, 0, currentX, currentY, glowRadius);
+                gradient2.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                gradient2.addColorStop(0.3, 'rgba(255, 200, 50, 0.8)');
+                gradient2.addColorStop(0.7, 'rgba(255, 100, 0, 0.4)');
+                gradient2.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                ctx.fillStyle = gradient2;
+                ctx.beginPath();
+                ctx.arc(currentX, currentY, glowRadius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(currentX, currentY, 3, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+            }
+            
+            getRect() {
+                if (this.progress >= this.distance) return null;
+                
+                const progressRatio = Math.min(1, this.progress / this.distance);
+                const currentX = this.startX + this.distance * progressRatio * Math.cos(this.angle);
+                const currentY = this.startY + this.distance * progressRatio * Math.sin(this.angle);
+                
+                return {
+                    x: currentX - 5,
+                    y: currentY - 5,
+                    w: 10,
+                    h: 10
+                };
+            }
+        }
+        
+        class Meteor {
+            constructor() {
+                this.size = 15 + Math.floor(Math.random() * 20);
+                this.x = Math.random() * (WIDTH - this.size);
+                this.y = -this.size;
+                this.speed = 2 + Math.random() * 3;
+                this.rotation = 0;
+                this.rotationSpeed = (Math.random() - 0.5) * 6;
+                this.craters = [];
+                
+                for (let i = 0; i < 3 + Math.floor(Math.random() * 4); i++) {
+                    this.craters.push({
+                        x: (Math.random() - 0.5) * this.size * 0.6,
+                        y: (Math.random() - 0.5) * this.size * 0.6,
+                        r: 2 + Math.random() * 3
+                    });
+                }
+            }
+            
+            update() {
+                this.y += this.speed;
+                this.rotation += this.rotationSpeed;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x + this.size/2, this.y + this.size/2);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                
+                // Основной круг
+                const radius = this.size/2 - 2;
+                const gradient = ctx.createRadialGradient(-radius/3, -radius/3, 0, 0, 0, radius);
+                gradient.addColorStop(0, '#c0c0c0');
+                gradient.addColorStop(0.7, '#888888');
+                gradient.addColorStop(1, '#555555');
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                ctx.strokeStyle = '#444';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                
+                // Кратеры
+                this.craters.forEach(crater => {
+                    ctx.beginPath();
+                    ctx.arc(crater.x, crater.y, crater.r, 0, Math.PI * 2);
+                    ctx.fillStyle = '#666666';
+                    ctx.fill();
+                    ctx.strokeStyle = '#555';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                });
+                
+                // Блик
+                ctx.beginPath();
+                ctx.arc(-radius/3, -radius/3, radius/4, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            getRect() {
+                const margin = 3;
+                return {
+                    x: this.x + margin,
+                    y: this.y + margin,
+                    w: this.size - margin * 2,
+                    h: this.size - margin * 2
+                };
+            }
+        }
+        
+        class FireMeteor {
+            constructor() {
+                this.size = 20 + Math.floor(Math.random() * 20);
+                this.x = Math.random() * (WIDTH - this.size);
+                this.y = -this.size;
+                this.speed = 6 + Math.random() * 4;
+                this.rotation = 0;
+                this.rotationSpeed = (Math.random() - 0.5) * 10;
+                this.particles = [];
+                this.particleTimer = 0;
+            }
+            
+            update() {
+                this.y += this.speed;
+                this.rotation += this.rotationSpeed;
+                
+                this.particleTimer++;
+                if (this.particleTimer > 2) {
+                    this.particleTimer = 0;
+                    for (let i = 0; i < 3; i++) {
+                        this.particles.push({
+                            x: this.x + this.size/2 + (Math.random() - 0.5) * this.size * 0.8,
+                            y: this.y + this.size + Math.random() * this.size * 0.5,
+                            vx: (Math.random() - 0.5) * 3,
+                            vy: 1 + Math.random() * 3,
+                            life: 10 + Math.floor(Math.random() * 15),
+                            maxLife: 25,
+                            size: 2 + Math.random() * 4,
+                            color: ['#ffcc33', '#ff9900', '#ff6600', '#cc3300'][Math.floor(Math.random() * 4)]
+                        });
+                    }
+                }
+                
+                this.particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life--;
+                    p.size *= 0.95;
+                });
+                this.particles = this.particles.filter(p => p.life > 0 && p.size > 0.5);
+            }
+            
+            draw() {
+                // Частицы
+                this.particles.forEach(p => {
+                    const alpha = p.life / p.maxLife;
+                    ctx.globalAlpha = alpha;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+                ctx.globalAlpha = 1;
+                
+                ctx.save();
+                ctx.translate(this.x + this.size/2, this.y + this.size/2);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                
+                const radius = this.size/2 - 2;
+                
+                // Огненный шар
+                for (let i = radius; i > 0; i -= 3) {
+                    const ratio = i / radius;
+                    let color;
+                    if (ratio > 0.7) color = '#ffffcc';
+                    else if (ratio > 0.4) color = '#ffcc33';
+                    else if (ratio > 0.2) color = '#ff6600';
+                    else color = '#cc3300';
+                    
+                    ctx.beginPath();
+                    ctx.arc(0, 0, i, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+                
+                // Темные пятна
+                for (let i = 0; i < 3; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = Math.random() * radius * 0.5;
+                    ctx.beginPath();
+                    ctx.arc(dist * Math.cos(angle), dist * Math.sin(angle), 2 + Math.random() * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#662200';
+                    ctx.fill();
+                }
+                
+                // Свечение
+                const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 1.5);
+                glow.addColorStop(0, 'rgba(255, 150, 0, 0.3)');
+                glow.addColorStop(0.5, 'rgba(255, 100, 0, 0.1)');
+                glow.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            getRect() {
+                const margin = this.size / 5;
+                return {
+                    x: this.x + margin,
+                    y: this.y + margin,
+                    w: this.size - margin * 2,
+                    h: this.size - margin * 2
+                };
+            }
+        }
+        
+        class Rock {
+            constructor() {
+                this.size = 10 + Math.floor(Math.random() * 15);
+                this.x = Math.random() * (WIDTH - this.size);
+                this.y = -this.size;
+                this.speed = 1.5 + Math.random() * 2.5;
+                this.rotation = 0;
+                this.rotationSpeed = (Math.random() - 0.5) * 4;
+                
+                this.points = [];
+                const numPoints = 6 + Math.floor(Math.random() * 4);
+                for (let i = 0; i < numPoints; i++) {
+                    const angle = (i / numPoints) * 2 * Math.PI;
+                    const radius = this.size/2 - 1 - Math.random() * 3;
+                    this.points.push({
+                        x: radius * Math.cos(angle),
+                        y: radius * Math.sin(angle)
+                    });
+                }
+            }
+            
+            update() {
+                this.y += this.speed;
+                this.rotation += this.rotationSpeed;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x + this.size/2, this.y + this.size/2);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                
+                ctx.beginPath();
+                this.points.forEach((p, i) => {
+                    if (i === 0) ctx.moveTo(p.x, p.y);
+                    else ctx.lineTo(p.x, p.y);
+                });
+                ctx.closePath();
+                ctx.fillStyle = '#8B6914';
+                ctx.fill();
+                ctx.strokeStyle = '#6B4F12';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                
+                ctx.restore();
+            }
+            
+            getRect() {
+                const margin = 4;
+                return {
+                    x: this.x + margin,
+                    y: this.y + margin,
+                    w: this.size - margin * 2,
+                    h: this.size - margin * 2
+                };
+            }
+        }
+        
+        class Particle {
+            constructor(x, y, color = null) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 6;
+                this.vy = (Math.random() - 0.5) * 6;
+                this.life = 30;
+                this.maxLife = 30;
+                this.size = 3 + Math.random() * 3;
+                if (color) {
+                    this.color = color;
+                } else {
+                    this.color = `rgb(${200 + Math.floor(Math.random() * 55)}, ${100 + Math.floor(Math.random() * 155)}, 0)`;
+                }
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.1;
+                this.life--;
+                this.size *= 0.95;
+            }
+            
+            draw() {
+                if (this.life <= 0 || this.size < 0.5) return;
+                const alpha = this.life / this.maxLife;
+                ctx.globalAlpha = alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, Math.max(0.5, this.size), 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+        
+        // --- Игровые объекты ---
+        let rocket = new Rocket();
+        let meteors = [];
+        let fireMeteors = [];
+        let rocks = [];
+        let ufos = [];
+        let lasers = [];
+        let particles = [];
+        let keys = {};
+        let spawnTimer = 0;
+        let ufoSpawnTimer = 0;
+        let frameCount = 0;
+        
+        // --- Функции игры ---
+        function rectCollide(r1, r2) {
+            return r1.x < r2.x + r2.w &&
+                   r1.x + r1.w > r2.x &&
+                   r1.y < r2.y + r2.h &&
+                   r1.y + r1.h > r2.y;
+        }
+        
+        function spawnObjects() {
+            const spawnRate = Math.max(8, 50 - Math.floor(score / 8));
+            spawnTimer++;
+            
+            if (spawnTimer > spawnRate / 2 + Math.floor(Math.random() * spawnRate / 2)) {
+                const type = Math.random();
+                if (type < 0.30) {
+                    meteors.push(new Meteor());
+                } else if (type < 0.45 && score > 20) {
+                    fireMeteors.push(new FireMeteor());
+                } else {
+                    rocks.push(new Rock());
+                }
+                spawnTimer = 0;
+            }
+            
+            // UFO spawn
+            if (score > 30) {
+                ufoSpawnTimer++;
+                const ufoRate = Math.max(150, 400 - Math.floor(score / 2));
+                if (ufoSpawnTimer > ufoRate && ufos.length < 3) {
+                    ufos.push(new UFO());
+                    ufoSpawnTimer = 0;
+                }
+            }
+        }
+        
+        function updateGame() {
+            if (!gameRunning || gameOver) return;
+            
+            frameCount++;
+            rocket.update(keys);
+            spawnObjects();
+            
+            // Update UFOs
+            ufos.forEach(ufo => {
+                const shouldShoot = ufo.update(rocket.x + rocket.width/2, rocket.y + rocket.height/2);
+                if (shouldShoot) {
+                    const targetX = rocket.x + rocket.width/2 + (Math.random() - 0.5) * 40;
+                    const targetY = rocket.y + rocket.height/2 + (Math.random() - 0.5) * 40;
+                    lasers.push(new Laser(
+                        ufo.x + ufo.width/2,
+                        ufo.y + ufo.height/2,
+                        targetX,
+                        targetY
+                    ));
+                    for (let i = 0; i < 5; i++) {
+                        particles.push(new Particle(ufo.x + ufo.width/2, ufo.y + ufo.height/2, '#ff6666'));
+                    }
+                }
+            });
+            
+            // Check UFO health
+            ufos = ufos.filter(ufo => {
+                if (ufo.hitpoints <= 0) {
+                    for (let i = 0; i < 30; i++) {
+                        const colors = ['#ff6666', '#ff00ff', '#aa00ff', '#ff0066'];
+                        particles.push(new Particle(
+                            ufo.x + ufo.width/2,
+                            ufo.y + ufo.height/2,
+                            colors[Math.floor(Math.random() * colors.length)]
+                        ));
+                    }
+                    score += 25;
+                    return false;
+                }
+                return true;
+            });
+            
+            // Update lasers
+            lasers = lasers.filter(laser => {
+                const done = laser.update();
+                if (done) return false;
+                
+                // Check collision with rocket
+                const laserRect = laser.getRect();
+                if (laserRect) {
+                    const rocketRect = rocket.getRect();
+                    if (rectCollide(laserRect, rocketRect)) {
+                        if (!rocket.invulnerable) {
+                            gameOver = true;
+                            for (let i = 0; i < 30; i++) {
+                                particles.push(new Particle(
+                                    rocket.x + rocket.width/2,
+                                    rocket.y + rocket.height/2
+                                ));
+                            }
+                        }
+                        return false;
+                    }
+                }
+                return true;
+            });
+            
+            // Update meteors
+            meteors = meteors.filter(meteor => {
+                meteor.update();
+                if (meteor.y > HEIGHT) {
+                    score += 5;
+                    for (let i = 0; i < 10; i++) {
+                        particles.push(new Particle(meteor.x + meteor.size/2, meteor.y + meteor.size/2));
+                    }
+                    return false;
+                }
+                return true;
+            });
+            
+            // Update fire meteors
+            fireMeteors = fireMeteors.filter(fm => {
+                fm.update();
+                if (fm.y > HEIGHT) {
+                    score += 15;
+                    for (let i = 0; i < 20; i++) {
+                        particles.push(new Particle(fm.x + fm.size/2, fm.y + fm.size/2));
+                    }
+                    return false;
+                }
+                return true;
+            });
+            
+            // Update rocks
+            rocks = rocks.filter(rock => {
+                rock.update();
+                if (rock.y > HEIGHT) {
+                    score += 2;
+                    return false;
+                }
+                return true;
+            });
+            
+            // Update particles
+            particles.forEach(p => p.update());
+            particles = particles.filter(p => p.life > 0 && p.size > 0.5);
+            
+            // Check collisions with rocket
+            if (!gameOver) {
+                const rocketRect = rocket.getRect();
+                
+                // Check meteors
+                for (let meteor of meteors) {
+                    if (rectCollide(rocketRect, meteor.getRect())) {
+                        if (!rocket.invulnerable) {
+                            gameOver = true;
+                            for (let i = 0; i < 30; i++) {
+                                particles.push(new Particle(rocket.x + rocket.width/2, rocket.y + rocket.height/2));
+                            }
+                        }
+                        break;
+                    }
+                }
+                
+                // Check fire meteors
+                if (!gameOver) {
+                    for (let fm of fireMeteors) {
+                        if (rectCollide(rocketRect, fm.getRect())) {
+                            if (!rocket.invulnerable) {
+                                gameOver = true;
+                                for (let i = 0; i < 40; i++) {
+                                    particles.push(new Particle(rocket.x + rocket.width/2, rocket.y + rocket.height/2));
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+                
+                // Check rocks
+                if (!gameOver) {
+                    for (let rock of rocks) {
+                        if (rectCollide(rocketRect, rock.getRect())) {
+                            if (!rocket.invulnerable) {
+                                gameOver = true;
+                                for (let i = 0; i < 30; i++) {
+                                    particles.push(new Particle(rocket.x + rocket.width/2, rocket.y + rocket.height/2));
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+                
+                // Check UFO collision
+                if (!gameOver) {
+                    for (let ufo of ufos) {
+                        if (rectCollide(rocketRect, ufo.getRect())) {
+                            if (!rocket.invulnerable) {
+                                gameOver = true;
+                                for (let i = 0; i < 30; i++) {
+                                    particles.push(new Particle(rocket.x + rocket.width/2, rocket.y + rocket.height/2));
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Update UI
+            scoreDisplay.textContent = score;
+            objectsDisplay.textContent = meteors.length + fireMeteors.length + rocks.length;
+            fireDisplay.textContent = fireMeteors.length;
+            ufoDisplay.textContent = ufos.length;
+            laserDisplay.textContent = lasers.length;
+            
+            if (gameOver) {
+                finalScore.textContent = score;
+                gameOverScreen.classList.remove('hidden');
+                gameRunning = false;
+            }
+        }
+        
+        function drawGame() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            
+            // Stars background
+            for (let i = 0; i < 50; i++) {
+                const x = (i * 137 + i * i * 7) % WIDTH;
+                const y = (i * 251 + i * i * 13) % HEIGHT;
+                const size = 0.5 + (i % 3) * 0.5;
+                const brightness = 100 + (i % 5) * 30;
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
+                ctx.fill();
+            }
+            
+            // Draw objects
+            particles.forEach(p => p.draw());
+            rocks.forEach(r => r.draw());
+            meteors.forEach(m => m.draw());
+            fireMeteors.forEach(fm => fm.draw());
+            lasers.forEach(l => l.draw());
+            ufos.forEach(u => u.draw());
+            rocket.draw();
+            
+            // Hints
+            if (score < 30 && gameRunning && !gameOver) {
+                ctx.fillStyle = '#ffdd00';
+                ctx.font = '16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Скоро появятся НЛО с лазерами! 👾', WIDTH/2, HEIGHT - 30);
+            } else if (score < 50 && gameRunning && !gameOver) {
+                ctx.fillStyle = '#ff6600';
+                ctx.font = '16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Уклоняйся от лазеров НЛО! ⚡', WIDTH/2, HEIGHT - 30);
+            }
+        }
+        
+        function gameLoop() {
+            updateGame();
+            drawGame();
+            animFrameId = requestAnimationFrame(gameLoop);
+        }
+        
+        // --- Управление ---
+        document.addEventListener('keydown', (e) => {
+            keys[e.code] = true;
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (!gameRunning && !gameOver) {
+                    startGame();
+                }
+            }
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            keys[e.code] = false;
+        });
+        
+        // --- Функции управления игрой ---
+        function startGame() {
+            rocket = new Rocket();
+            meteors = [];
+            fireMeteors = [];
+            rocks = [];
+            ufos = [];
+            lasers = [];
+            particles = [];
+            score = 0;
+            spawnTimer = 0;
+            ufoSpawnTimer = 0;
+            gameOver = false;
+            gameRunning = true;
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+            gameLoop();
+        }
+        
+        function restartGame() {
+            startGame();
+        }
+        
+        function quitGame() {
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+            gameRunning = false;
+            gameOver = false;
+            startScreen.classList.remove('hidden');
+            gameOverScreen.classList.add('hidden');
+            // Reset game state
+            rocket = new Rocket();
+            meteors = [];
+            fireMeteors = [];
+            rocks = [];
+            ufos = [];
+            lasers = [];
+            particles = [];
+            score = 0;
+            spawnTimer = 0;
+            ufoSpawnTimer = 0;
+            scoreDisplay.textContent = '0';
+            objectsDisplay.textContent = '0';
+            fireDisplay.textContent = '0';
+            ufoDisplay.textContent = '0';
+            laserDisplay.textContent = '0';
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        }
+        
+        // --- Обработчики кнопок ---
+        document.getElementById('startBtn').addEventListener('click', startGame);
+        document.getElementById('restartBtn').addEventListener('click', restartGame);
+        document.getElementById('quitBtn').addEventListener('click', quitGame);
+        
+        // --- Touch controls for mobile ---
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            touchStartX = touch.clientX - rect.left;
+            touchStartY = touch.clientY - rect.top;
+            
+            // Имитация клавиш для мобильных устройств
+            const canvasX = touchStartX / (rect.width / WIDTH);
+            const canvasY = touchStartY / (rect.height / HEIGHT);
+            
+            if (canvasX < WIDTH/3) keys['ArrowLeft'] = true;
+            else if (canvasX > 2*WIDTH/3) keys['ArrowRight'] = true;
+            else keys['ArrowLeft'] = false;
+            keys['ArrowRight'] = false;
+            
+            if (canvasY < HEIGHT/2) keys['ArrowUp'] = true;
+            else keys['ArrowDown'] = true;
+        }, {passive: false});
+        
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const canvasX = (touch.clientX - rect.left) / (rect.width / WIDTH);
+            const canvasY = (touch.clientY - rect.top) / (rect.height / HEIGHT);
+            
+            if (canvasX < WIDTH/3) {
+                keys['ArrowLeft'] = true;
+                keys['ArrowRight'] = false;
+            } else if (canvasX > 2*WIDTH/3) {
+                keys['ArrowRight'] = true;
+                keys['ArrowLeft'] = false;
+            } else {
+                keys['ArrowLeft'] = false;
+                keys['ArrowRight'] = false;
+            }
+            
+            if (canvasY < HEIGHT/2) {
+                keys['ArrowUp'] = true;
+                keys['ArrowDown'] = false;
+            } else {
+                keys['ArrowDown'] = true;
+                keys['ArrowUp'] = false;
+            }
+        }, {passive: false});
+        
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keys['ArrowLeft'] = false;
+            keys['ArrowRight'] = false;
+            keys['ArrowUp'] = false;
+            keys['ArrowDown'] = false;
+        }, {passive: false});
+        
+        // --- Initial draw ---
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+        for (let i = 0; i < 50; i++) {
+            const x = (i * 137 + i * i * 7) % WIDTH;
+            const y = (i * 251 + i * i * 13) % HEIGHT;
+            const size = 0.5 + (i % 3) * 0.5;
+            const brightness = 100 + (i % 5) * 30;
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
+            ctx.fill();
+        }
+        
+        console.log('🚀 Игра загружена! Нажмите "СТАРТ" чтобы начать.');
+    </script>
+</body>
+</html>
