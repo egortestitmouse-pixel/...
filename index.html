@@ -939,6 +939,7 @@
     .project-card:nth-child(1) { animation-delay: 0.6s; }
     .project-card:nth-child(2) { animation-delay: 0.8s; }
     .project-card:nth-child(3) { animation-delay: 1.0s; }
+    .project-card:nth-child(4) { animation-delay: 1.2s; }
 
     @keyframes cardSlide {
       0% {
@@ -984,6 +985,7 @@
 
     .project-card:nth-child(2) .project-icon { animation-delay: 0.5s; }
     .project-card:nth-child(3) .project-icon { animation-delay: 1s; }
+    .project-card:nth-child(4) .project-icon { animation-delay: 1.5s; }
 
     @keyframes iconFloat {
       0%, 100% { transform: translateY(0) scale(1); }
@@ -1070,6 +1072,7 @@
 
     .project-card:nth-child(2) .reaction-emoji { animation-delay: 0.5s; }
     .project-card:nth-child(3) .reaction-emoji { animation-delay: 1s; }
+    .project-card:nth-child(4) .reaction-emoji { animation-delay: 1.5s; }
 
     @keyframes emojiBounce {
       0%, 100% { transform: scale(1) rotate(0deg); }
@@ -1250,7 +1253,6 @@
         <span class="wave">👋</span>
       </h1>
       <div class="tagline">
-        <!-- НОВЫЙ ЦВЕТ ДЛЯ "НАЧИНАЮЩИЙ РАЗРАБОТЧИК" -->
         <span class="developer-text">🚀 Начинающий разработчик</span>
         <span>🇧🇾 Минск</span>
         <span class="location"><i class="fas fa-map-pin"></i> 15 лет</span>
@@ -1343,6 +1345,21 @@
           <span class="stroke-text">Полноценный интернет-магазин</span> с корзиной, авторизацией, админ-панелью и системой заказов.
         </div>
         <a href="#" class="btn-link"><i class="fab fa-github"></i> Репозиторий</a>
+      </div>
+
+      <!-- ===== НОВАЯ КАРТОЧКА С ИГРОЙ ===== -->
+      <div class="project-card">
+        <div class="reaction-emoji">🎮</div>
+        <div class="project-icon"><i class="fas fa-gamepad" style="color: #5f27cd;"></i></div>
+        <h3 class="glitch-text" style="font-size: 1.2rem;">Моя игра</h3>
+        <div class="project-meta">
+          <span><i class="fas fa-code"></i> HTML / CSS / JS</span>
+          <span><i class="fas fa-rocket"></i> Игровой проект</span>
+        </div>
+        <div class="project-desc">
+          <span class="pulse-text">Интерактивная игра</span>, которую я создал самостоятельно. Попробуй пройти!
+        </div>
+        <a href="https://egortestitmouse-pixel.github.io/game/" target="_blank" class="btn-link"><i class="fas fa-play"></i> Играть</a>
       </div>
 
     </div>
