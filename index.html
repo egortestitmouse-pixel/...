@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Егор Константинович | Визитка</title>
+  <title>Егор Константинович | Game Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -24,7 +24,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, 
+      background: linear-gradient(135deg,
         #ff6b6b, #feca57, #48dbfb, #1dd1a1, #5f27cd, #ff6b6b);
       background-size: 400% 400%;
       animation: rainbow 12s ease infinite;
@@ -40,7 +40,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* ===== ПЕРСОНАЖ ===== */
     .character {
       position: fixed;
       bottom: 20px;
@@ -144,7 +143,7 @@
     }
 
     .antenna::after {
-      content: '⚡';
+      content: '🎮';
       position: absolute;
       top: -18px;
       left: 50%;
@@ -313,7 +312,37 @@
       50% { transform: rotate(30deg); }
     }
 
-    /* ===== ОСТАЛЬНЫЕ СТИЛИ ===== */
+    .pixel-text {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1, #5f27cd);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease infinite;
+      text-shadow: none;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .game-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1, #5f27cd);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease infinite;
+      letter-spacing: 2px;
+    }
+
     .particles {
       position: fixed;
       top: 0;
@@ -421,26 +450,6 @@
       }
     }
 
-    /* ===== НОВЫЙ СТИЛЬ ДЛЯ "НАЧИНАЮЩИЙ РАЗРАБОТЧИК" ===== */
-    .developer-text {
-      background: linear-gradient(135deg, #ff6b9d, #c44dff, #6c5ce7);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: developerGradient 3s ease-in-out infinite;
-      font-weight: 800;
-      display: inline-block;
-      padding: 0 5px;
-    }
-
-    @keyframes developerGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ===== ОСТАЛЬНЫЕ СТИЛИ ДЛЯ ТЕКСТА ===== */
     .gradient-text {
       background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1, #5f27cd);
       background-size: 300% 300%;
@@ -451,15 +460,9 @@
       font-weight: 800;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     .neon-text {
       color: #fff;
-      text-shadow: 
+      text-shadow:
         0 0 7px #fff,
         0 0 10px #fff,
         0 0 21px #fff,
@@ -894,6 +897,170 @@
       color: #1d2a38;
     }
 
+    .achievement-badge {
+      background: linear-gradient(135deg, #f6c343, #f5a623) !important;
+      border-color: #f5a623 !important;
+      color: #1d2a38 !important;
+    }
+
+    .achievement-badge i {
+      color: #1d2a38 !important;
+    }
+
+    .achievement-badge:hover {
+      background: linear-gradient(135deg, #ff6b6b, #feca57) !important;
+      transform: translateY(-5px) scale(1.08) rotate(-2deg) !important;
+    }
+
+    .game-project-section {
+      margin: 2.5rem 0;
+      animation: fadeInUp 0.8s ease-out 0.7s both;
+    }
+
+    .game-project-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-project-section h2 i {
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .game-wrapper {
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 2rem;
+      padding: 1.5rem;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-wrapper:hover {
+      border-color: rgba(100, 200, 255, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 100, 255, 0.2);
+    }
+
+    .game-wrapper::before {
+      content: '🎮 Играй прямо сейчас!';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #00ff00;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid #00ff00;
+      z-index: 10;
+      animation: pulse 2s ease-in-out infinite;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    .game-iframe-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #000;
+    }
+
+    .game-iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 1rem;
+      background: #000;
+    }
+
+    .game-description {
+      margin-top: 1rem;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .game-description .game-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .game-description .game-info span {
+      color: #aaa;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .game-description .game-info span i {
+      color: #f6c343;
+    }
+
+    .game-description .game-links {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .game-description .game-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .game-description .game-links a:hover {
+      background: #2d6a9f;
+      border-color: #2d6a9f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(45, 106, 159, 0.3);
+    }
+
+    .game-description .game-links a.github-link:hover {
+      background: #333;
+      border-color: #666;
+    }
+
     .projects {
       animation: fadeInUp 0.8s ease-out 0.5s both;
     }
@@ -910,11 +1077,6 @@
 
     .projects h2 i {
       animation: spin 8s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
 
     .project-grid {
@@ -940,6 +1102,7 @@
     .project-card:nth-child(2) { animation-delay: 0.8s; }
     .project-card:nth-child(3) { animation-delay: 1.0s; }
     .project-card:nth-child(4) { animation-delay: 1.2s; }
+    .project-card:nth-child(5) { animation-delay: 1.4s; }
 
     @keyframes cardSlide {
       0% {
@@ -986,6 +1149,7 @@
     .project-card:nth-child(2) .project-icon { animation-delay: 0.5s; }
     .project-card:nth-child(3) .project-icon { animation-delay: 1s; }
     .project-card:nth-child(4) .project-icon { animation-delay: 1.5s; }
+    .project-card:nth-child(5) .project-icon { animation-delay: 2s; }
 
     @keyframes iconFloat {
       0%, 100% { transform: translateY(0) scale(1); }
@@ -1073,6 +1237,7 @@
     .project-card:nth-child(2) .reaction-emoji { animation-delay: 0.5s; }
     .project-card:nth-child(3) .reaction-emoji { animation-delay: 1s; }
     .project-card:nth-child(4) .reaction-emoji { animation-delay: 1.5s; }
+    .project-card:nth-child(5) .reaction-emoji { animation-delay: 2s; }
 
     @keyframes emojiBounce {
       0%, 100% { transform: scale(1) rotate(0deg); }
@@ -1099,6 +1264,73 @@
     .project-card:hover .testimonial {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .code-block {
+      margin-top: 1rem;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .code-block.active {
+      display: block;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .code-block pre {
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .code-block .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      color: #aaa;
+      font-size: 0.8rem;
+    }
+
+    .code-block .code-header .close-code {
+      cursor: pointer;
+      color: #ff6b6b;
+      transition: all 0.3s;
+      background: none;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .code-block .code-header .close-code:hover {
+      transform: scale(1.2);
+      color: #ff0000;
+    }
+
+    .show-code-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: rgba(0, 200, 0, 0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: #00ff00;
+      cursor: pointer;
+      border: 1px solid #00ff00;
+      transition: all 0.3s;
+    }
+
+    .show-code-btn:hover {
+      background: rgba(0, 200, 0, 0.4);
+      transform: scale(1.05);
     }
 
     .footer-note {
@@ -1172,6 +1404,26 @@
         bottom: 5px;
         right: 5px;
       }
+      .game-title {
+        font-size: 1rem;
+      }
+      .game-description {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      .game-description .game-info {
+        justify-content: center;
+      }
+      .game-description .game-links {
+        justify-content: center;
+      }
+      .game-wrapper::before {
+        top: 10px;
+        right: 10px;
+        font-size: 0.5rem;
+        padding: 4px 10px;
+      }
     }
 
     @media (max-width: 450px) {
@@ -1183,6 +1435,9 @@
         bottom: 0;
         right: 0;
       }
+      .game-iframe-container {
+        padding-bottom: 100%;
+      }
     }
   </style>
 </head>
@@ -1191,44 +1446,43 @@
   <div class="particles" id="particles"></div>
 
   <div class="floating-emojis">
-    <span class="float-emoji">🚀</span>
-    <span class="float-emoji">⭐</span>
     <span class="float-emoji">🎮</span>
+    <span class="float-emoji">⭐</span>
+    <span class="float-emoji">🕹️</span>
     <span class="float-emoji">💻</span>
     <span class="float-emoji">🎵</span>
     <span class="float-emoji">🔥</span>
     <span class="float-emoji">✨</span>
-    <span class="float-emoji">🌟</span>
+    <span class="float-emoji">🏆</span>
     <span class="float-emoji">🎯</span>
     <span class="float-emoji">💪</span>
   </div>
 
-  <!-- ПЕРСОНАЖ -->
   <div class="character">
     <div class="character-body">
       <div class="speech-bubble">
-        <span class="speech-text">Привет! Я робот 🤖</span>
+        <span class="speech-text">Привет! Я гейм-робот 🎮</span>
       </div>
-      
+
       <div class="robot-head">
         <div class="antenna"></div>
         <div class="eye left"></div>
         <div class="eye right"></div>
         <div class="mouth"></div>
       </div>
-      
+
       <div class="robot-body">
         <div class="button"></div>
         <div class="button"></div>
         <div class="button"></div>
         <div class="button"></div>
       </div>
-      
+
       <div class="robot-legs">
         <div class="leg"></div>
         <div class="leg"></div>
       </div>
-      
+
       <div class="arms">
         <div class="arm left"></div>
         <div class="arm right"></div>
@@ -1241,7 +1495,7 @@
   <div class="profile">
     <div class="profile-avatar">
       ЕК
-      <span class="status-emoji">💫</span>
+      <span class="status-emoji">🎮</span>
     </div>
     <div class="profile-info">
       <h1>
@@ -1253,10 +1507,10 @@
         <span class="wave">👋</span>
       </h1>
       <div class="tagline">
-        <span class="developer-text">🚀 Начинающий разработчик</span>
+        <span class="pixel-text">🎮 Game Developer</span>
         <span>🇧🇾 Минск</span>
         <span class="location"><i class="fas fa-map-pin"></i> 15 лет</span>
-        <span class="bounce-text">😎 Учусь и создаю</span>
+        <span class="bounce-text">😎 Создаю игры</span>
       </div>
       <div class="social-links">
         <a href="#" target="_blank" aria-label="Instagram">
@@ -1281,92 +1535,213 @@
 
   <div class="badge-section">
     <h2>
-      <i class="fas fa-award" style="color: #f6c343;"></i> 
-      <span class="neon-text">Мои достижения и навыки</span>
+      <i class="fas fa-trophy" style="color: #f6c343;"></i>
+      <span class="neon-text">Игровые достижения</span>
       <span style="font-size: 1.5rem; margin-left: 5px;">🏆</span>
     </h2>
     <div class="badge-grid">
-      <span class="badge"><i class="fas fa-code" style="color: #2d6a9f;"></i> <span class="pulse-text">Python / Django</span></span>
-      <span class="badge"><i class="fas fa-store" style="color: #1dd1a1;"></i> <span class="shadow-text">Интернет-магазины</span></span>
+      <span class="badge"><i class="fas fa-code" style="color: #2d6a9f;"></i> <span class="pulse-text">Unity / C#</span></span>
+      <span class="badge"><i class="fas fa-gamepad" style="color: #1dd1a1;"></i> <span class="shadow-text">Game Design</span></span>
       <span class="badge"><i class="fas fa-chalkboard-teacher" style="color: #feca57;"></i> <span class="bounce-text">Преподаватель ITMOUSE</span></span>
-      <span class="badge"><i class="fas fa-music" style="color: #ff6b6b;"></i> <span class="gradient-text">Трек «Светлячок»</span></span>
-      <span class="badge achievement"><i class="fas fa-star"></i> <span class="neon-text" style="font-size: 0.9rem;">Опыт наставничества</span></span>
-      <span class="badge achievement"><i class="fas fa-rocket"></i> <span class="glitch-text" style="font-size: 0.9rem;">Проект Suno</span></span>
-      <span class="badge"><i class="fas fa-robot" style="color: #5f27cd;"></i> <span class="stroke-text">HTML / CSS / JS</span></span>
-      <span class="badge"><i class="fas fa-brain" style="color: #48dbfb;"></i> <span class="typewriter-text">Быстро учусь 🧠</span></span>
+      <span class="badge"><i class="fas fa-music" style="color: #ff6b6b;"></i> <span class="gradient-text">Саунд-дизайн</span></span>
+      <span class="badge achievement"><i class="fas fa-star"></i> <span class="neon-text" style="font-size: 0.9rem;">2D / 3D графика</span></span>
+      <span class="badge achievement"><i class="fas fa-rocket"></i> <span class="glitch-text" style="font-size: 0.9rem;">Создатель игр</span></span>
+      <span class="badge"><i class="fas fa-robot" style="color: #5f27cd;"></i> <span class="stroke-text">Python / Django</span></span>
+      <span class="badge achievement-badge"><i class="fas fa-crown"></i> <span class="typewriter-text">Уровень: 15 🧠</span></span>
+    </div>
+  </div>
+
+  <div class="game-project-section">
+    <h2>
+      <i class="fas fa-rocket" style="color: #ff6b6b;"></i>
+      <span class="game-title">Космический полет</span>
+      <span style="font-size: 1.8rem;">🚀</span>
+    </h2>
+    <div class="game-wrapper">
+      <div class="game-iframe-container">
+        <iframe src="https://egortestitmouse-pixel.github.io/.../game2.html"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+      </div>
+      <div class="game-description">
+        <div class="game-info">
+          <span><i class="fas fa-gamepad"></i> Шутер</span>
+          <span><i class="fas fa-users"></i> 1 игрок</span>
+          <span><i class="fas fa-calendar-alt"></i> 2026</span>
+          <span><i class="fas fa-code"></i> HTML5 / Canvas</span>
+        </div>
+        <div class="game-links">
+          <a href="https://github.com/egortestitmouse-pixel/.../blob/main/game2.html" target="_blank" class="github-link">
+            <i class="fab fa-github"></i> Код
+          </a>
+          <a href="#" target="_blank" class="play-link" onclick="document.querySelector('.game-iframe-container iframe').src = document.querySelector('.game-iframe-container iframe').src;">
+            <i class="fas fa-play"></i> Играть
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="projects">
     <h2>
-      <i class="fas fa-folder-open" style="color: #feca57;"></i> 
-      <span class="gradient-text">Мои проекты</span>
-      <span style="font-size: 1.8rem;">💼</span>
+      <i class="fas fa-folder-open" style="color: #feca57;"></i>
+      <span class="game-title">Мои проекты</span>
+      <span style="font-size: 1.8rem;">🕹️</span>
     </h2>
     <div class="project-grid">
 
       <div class="project-card">
-        <div class="reaction-emoji">🤓</div>
-        <div class="project-icon"><i class="fas fa-chalkboard-teacher" style="color: #feca57;"></i></div>
+        <div class="reaction-emoji">🎮</div>
+        <div class="project-icon"><i class="fas fa-gamepad" style="color: #ff6b6b;"></i></div>
         <h3 class="shadow-text">ITMOUSE — учитель</h3>
         <div class="project-meta">
           <span><i class="fas fa-calendar-alt"></i> 2025</span>
           <span><i class="fas fa-users"></i> Школа программирования</span>
         </div>
         <div class="project-desc">
-          <span class="pulse-text">Веду занятия</span> для начинающих ребят по Python и веб-разработке. Помогаю освоить логику и создавать первые проекты.
+          <span class="pulse-text">Обучаю детей</span> созданию игр на Unity и Python. Помогаю освоить гейм-дизайн и программирование.
         </div>
-        <span class="testimonial">💬 "Лучший учитель!" — ученики</span>
+        <span class="testimonial">💬 "Лучший учитель по играм!" — ученики</span>
       </div>
 
       <div class="project-card">
         <div class="reaction-emoji">🎶</div>
-        <div class="project-icon"><i class="fas fa-headphones" style="color: #ff6b6b;"></i></div>
+        <div class="project-icon"><i class="fas fa-headphones" style="color: #feca57;"></i></div>
         <h3 class="gradient-text">Светлячок в ладони</h3>
         <div class="project-meta">
-          <span><i class="fas fa-music"></i> Трек</span>
+          <span><i class="fas fa-music"></i> Саундтрек</span>
           <span><i class="fas fa-link"></i> <a href="https://suno.com/s/OyLHo6PA2tmierB3" target="_blank" style="color:#1d2a38; text-decoration:underline;">Слушать</a></span>
         </div>
         <div class="project-desc">
-          <span class="bounce-text">Создал атмосферный трек</span> через Suno. Тёплая, мелодичная композиция с лёгким электронным звучанием.
+          <span class="bounce-text">Создал саундтрек</span> для игры. Атмосферная композиция с лёгким электронным звучанием.
         </div>
-        <a href="https://suno.com/s/OyLHo6PA2tmierB3" target="_blank" class="btn-link"><i class="fas fa-play"></i> Послушать</a>
+        <a href="https://suno.com/s/OyLHo6PA2tmierB3" target="_blank" class="btn-link"><i class="fas fa-play"></i> Слушать</a>
       </div>
 
       <div class="project-card">
         <div class="reaction-emoji">🛒</div>
-        <div class="project-icon"><i class="fas fa-shopping-cart" style="color: #1dd1a1;"></i></div>
-        <h3 class="neon-text" style="font-size: 1.2rem;">Интернет-магазин</h3>
+        <div class="project-icon"><i class="fas fa-shopping-cart" style="color: #48dbfb;"></i></div>
+        <h3 class="neon-text" style="font-size: 1.2rem;">Игровой магазин</h3>
         <div class="project-meta">
           <span><i class="fab fa-python"></i> Python / Django</span>
           <span><i class="fas fa-database"></i> PostgreSQL</span>
         </div>
         <div class="project-desc">
-          <span class="stroke-text">Полноценный интернет-магазин</span> с корзиной, авторизацией, админ-панелью и системой заказов.
+          <span class="stroke-text">Интернет-магазин</span> для игр с системой заказов, корзиной и авторизацией.
         </div>
         <a href="#" class="btn-link"><i class="fab fa-github"></i> Репозиторий</a>
       </div>
 
-      <!-- ===== НОВАЯ КАРТОЧКА С ИГРОЙ ===== -->
       <div class="project-card">
-        <div class="reaction-emoji">🎮</div>
-        <div class="project-icon"><i class="fas fa-gamepad" style="color: #5f27cd;"></i></div>
-        <h3 class="glitch-text" style="font-size: 1.2rem;">Моя игра</h3>
+        <div class="reaction-emoji">🤖</div>
+        <div class="project-icon"><i class="fab fa-telegram" style="color: #0088cc;"></i></div>
+        <h3 class="gradient-text">Kindoson Bot</h3>
         <div class="project-meta">
-          <span><i class="fas fa-code"></i> HTML / CSS / JS</span>
-          <span><i class="fas fa-rocket"></i> Игровой проект</span>
+          <span><i class="fab fa-python"></i> Python / Aiogram</span>
+          <span><i class="fas fa-bolt"></i> Telegram Bot</span>
         </div>
         <div class="project-desc">
-          <span class="pulse-text">Интерактивная игра</span>, которую я создал самостоятельно. Попробуй пройти!
+          <span class="bounce-text">Телеграм-бот</span> с полезными функциями. Написан на Python с использованием Aiogram.
         </div>
-        <a href="https://egortestitmouse-pixel.github.io/game/" target="_blank" class="btn-link"><i class="fas fa-play"></i> Играть</a>
+        <a href="https://t.me/Kindoson_bot" target="_blank" class="btn-link">
+          <i class="fab fa-telegram"></i> Открыть в Telegram
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div class="reaction-emoji">🐍</div>
+        <div class="project-icon"><i class="fas fa-code" style="color: #4B8BBE;"></i></div>
+        <h3 class="glitch-text" style="font-size: 1.2rem;">bot.py</h3>
+        <div class="project-meta">
+          <span><i class="fab fa-python"></i> Python</span>
+          <span><i class="fas fa-robot"></i> Telegram Bot API</span>
+        </div>
+        <div class="project-desc">
+          <span class="pulse-text">Основной файл</span> с логикой Telegram-бота. Обработка команд, работа с базой данных и API.
+        </div>
+        <a href="https://t.me/Kindoson_bot" target="_blank" class="btn-link" style="background: #0088cc; color: white; border-color: #0088cc; margin-top: 0.5rem;">
+          <i class="fab fa-telegram"></i> Открыть бота
+        </a>
+        <button class="show-code-btn" onclick="toggleCode()">
+          <i class="fas fa-eye"></i> Показать код
+        </button>
+        <div class="code-block" id="botCode">
+          <div class="code-header">
+            <span><i class="fab fa-python"></i> bot.py</span>
+            <button class="close-code" onclick="toggleCode()">✖</button>
+          </div>
+          <pre>
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import Command
+import asyncio
+
+# Настройка логирования
+logging.basicConfig(level=logging.INFO)
+
+# Токен бота (замени на свой)
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+
+# Инициализация бота и диспетчера
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
+
+# Обработчик команды /start
+@dp.message(Command("start"))
+async def start_command(message: types.Message):
+    await message.answer(
+        "👋 Привет! Я Kindoson Bot!\n"
+        "Я умею:\n"
+        "• /help - показать список команд\n"
+        "• /info - информация о боте\n"
+        "• /game - сыграть в игру"
+    )
+
+# Обработчик команды /help
+@dp.message(Command("help"))
+async def help_command(message: types.Message):
+    await message.answer(
+        "📋 Список команд:\n"
+        "/start - начать работу\n"
+        "/help - показать это сообщение\n"
+        "/info - информация о боте\n"
+        "/game - запустить мини-игру"
+    )
+
+# Обработчик команды /info
+@dp.message(Command("info"))
+async def info_command(message: types.Message):
+    await message.answer(
+        "🤖 Kindoson Bot\n"
+        "Версия: 1.0.0\n"
+        "Создан: Егор Константинович\n"
+        "Технологии: Python, Aiogram"
+    )
+
+# Обработчик команды /game
+@dp.message(Command("game"))
+async def game_command(message: types.Message):
+    await message.answer(
+        "🎮 Угадай число!\n"
+        "Я загадал число от 1 до 10. Попробуй угадать!"
+    )
+
+# Запуск бота
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+          </pre>
+        </div>
       </div>
 
     </div>
   </div>
 
   <div class="footer-note">
-    <span><i class="far fa-copyright"></i> 2026 · <span class="gradient-text">Егор Константинович</span> <span style="font-size: 1.2rem;">✨</span></span>
+    <span><i class="far fa-copyright"></i> 2026 · <span class="gradient-text">Егор Константинович</span> <span style="font-size: 1.2rem;">🎮</span></span>
     <span><i class="fas fa-code"></i> Сделано с <span class="heart">❤️</span> в <span class="bounce-text">Минске</span> <span style="font-size: 1.2rem;">🇧🇾</span></span>
   </div>
 
@@ -1376,39 +1751,43 @@
   (function createParticles() {
     const container = document.getElementById('particles');
     const count = 30;
-    
+
     for (let i = 0; i < count; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
-      
+
       const size = Math.random() * 8 + 3;
       const duration = Math.random() * 20 + 15;
       const delay = Math.random() * 20;
       const left = Math.random() * 100;
       const opacity = Math.random() * 0.5 + 0.2;
-      
+
       particle.style.width = size + 'px';
       particle.style.height = size + 'px';
       particle.style.left = left + '%';
       particle.style.animationDuration = duration + 's';
       particle.style.animationDelay = delay + 's';
       particle.style.opacity = opacity;
-      
+
       const colors = ['rgba(255,255,255,0.6)', 'rgba(255,215,0,0.4)', 'rgba(100,200,255,0.4)', 'rgba(255,100,150,0.4)'];
       particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-      
+
       container.appendChild(particle);
     }
   })();
 
-  // Смена текста в пузыре
+  function toggleCode() {
+    const codeBlock = document.getElementById('botCode');
+    codeBlock.classList.toggle('active');
+  }
+
   const speechTexts = [
-    'Привет! Я робот 🤖',
-    'Ты крутой разработчик! ⭐',
-    'Продолжай творить! 🚀',
+    'Привет! Я гейм-робот 🎮',
+    'Ты крутой разработчик игр! ⭐',
+    'Продолжай создавать игры! 🚀',
     'У тебя всё получится! 💪',
-    'Я твой помощник! 🤖',
-    'Давай создавать! 🎨'
+    'Давай создавать шедевры! 🎨',
+    'Игры — это искусство! 🎮'
   ];
   let currentIndex = 0;
   const speechElement = document.querySelector('.speech-text');
