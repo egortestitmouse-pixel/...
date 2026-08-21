@@ -1,79 +1,96 @@
-🎮 Егор Константинович — Game Developer & ITMOUSE Teacher
-Добро пожаловать в мой игровой мир!
-Я — разработчик игр, преподаватель в школе программирования ITMOUSE и создатель крутых проектов. Мне 15 лет, я из Минска 🇧🇾 и каждый день улучшаю свои навыки в гейм-деве, программировании и дизайне.
+🎮 Егор Константинович — Game Developer
+Личная страница-портфолио 15-летнего разработчика игр из Минска, Беларусь.
 
-🚀 О себе
-Имя: Егор Константинович
+https://img.shields.io/badge/html5-%2523E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+https://img.shields.io/badge/css3-%25231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+https://img.shields.io/badge/javascript-%2523323330.svg?style=for-the-badge&logo=javascript&logoColor=%2523F7DF1E
+https://img.shields.io/badge/unity-%2523000000.svg?style=for-the-badge&logo=unity&logoColor=white
+https://img.shields.io/badge/c%2523-%2523239120.svg?style=for-the-badge&logo=csharp&logoColor=white
+https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
+https://img.shields.io/badge/django-%2523092E20.svg?style=for-the-badge&logo=django&logoColor=white
+https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white
+https://img.shields.io/badge/github-%2523121011.svg?style=for-the-badge&logo=github&logoColor=white
 
-Возраст: 15 лет
+🌟 Обзор
+Это моя личная страница-портфолио, созданная для демонстрации моих навыков в разработке игр и веб-программировании. Вся страница стилизована под игровую тематику и включает в себя анимированного персонажа, интерактивные элементы и встроенную игру.
 
-Локация: Минск, Беларусь 🇧🇾
+🎯 Особенности
+✅ Анимированный фон с радужным градиентом и партиклами
 
-Специализация: Game Developer, Unity / C#, Python, Django
+✅ Интерактивный робот-персонаж с репликами и анимациями
 
-Роль: Преподаватель в ITMOUSE (обучаю детей созданию игр)
+✅ Встроенная игра «Космический полет» (HTML5 Canvas)
 
-Инструменты: Unity, Visual Studio, Photoshop, FL Studio (саунд-дизайн)
+✅ Адаптивный дизайн под все устройства
 
-🛠️ Мои навыки и технологии
-https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white
-https://img.shields.io/badge/C%2523-239120?style=for-the-badge&logo=c-sharp&logoColor=white
-https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
-https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white
-https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
-https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
-https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-https://img.shields.io/badge/Telegram-Bots-26A5E4?style=for-the-badge&logo=telegram&logoColor=white
-https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white
-https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+✅ Игровые достижения и навыки в виде бейджей
 
+✅ Проекты с описаниями и ссылками
+
+✅ Telegram-бот с открытым исходным кодом
+
+🛠️ Технологии
+Разработка игр
+Технология	Назначение
+https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=white	Разработка 2D/3D игр
+https://img.shields.io/badge/C%2523-239120?style=flat&logo=csharp&logoColor=white	Язык программирования для Unity
+https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white	Веб-игры и Canvas
+Веб-разработка
+Технология	Назначение
+https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white	Бэкенд-разработка
+https://img.shields.io/badge/Django-092E20?style=flat&logo=django&logoColor=white	Веб-фреймворк
+https://img.shields.io/badge/Aiogram-2CA5E0?style=flat&logo=telegram&logoColor=white	Telegram Bot API
+Дизайн
+Технология	Назначение
+https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white	UI/UX дизайн
+https://img.shields.io/badge/Photoshop-31A8FF?style=flat&logo=adobephotoshop&logoColor=white	2D графика
+https://img.shields.io/badge/Audacity-0000CC?style=flat&logo=audacity&logoColor=white	Саунд-дизайн
 🎮 Проекты
-🌟 Космический полет
-Шутер на HTML5 / Canvas с динамическим геймплеем.
+Проект	Описание	Технологии
+ITMOUSE — учитель	Преподавание гейм-дизайна детям	Unity, C#, Python
+Светлячок в ладони	Создание саундтрека для игры	Suno AI, Саунд-дизайн
+Игровой магазин	Интернет-магазин игр	Python, Django, PostgreSQL
+Kindoson Bot	Телеграм-бот с полезными функциями	Python, Aiogram
+Космический полет	Веб-шутер на Canvas	HTML5, JavaScript, Canvas
+🚀 Демо
+Встроенная игра
+На странице доступна игра «Космический полет» — шутер на HTML5 Canvas с элементами управления.
 
-https://img.shields.io/badge/%D0%9A%D0%BE%D0%B4-181717?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/%D0%98%D0%B3%D1%80%D0%B0%D1%82%D1%8C-00C853?style=for-the-badge&logo=google-play&logoColor=white
+Telegram-бот
+Бот Kindoson Bot доступен по ссылке:
+https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white
 
-🎶 Светлячок в ладони
-Атмосферный саундтрек для игры.
+📱 Адаптивность
+✅ Десктоп — полный функционал
 
-https://img.shields.io/badge/%D0%A1%D0%BB%D1%83%D1%88%D0%B0%D1%82%D1%8C-FF6B6B?style=for-the-badge&logo=spotify&logoColor=white
+✅ Планшет — адаптированная верстка
 
-🛒 Игровой магазин
-Интернет-магазин для игр на Django / PostgreSQL.
+✅ Телефон — мобильная оптимизация
 
-https://img.shields.io/badge/%D0%A0%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B9-181717?style=for-the-badge&logo=github&logoColor=white
+🎨 Визуальные эффекты
+Эффект	Описание
+🌈 Радужный фон	Анимированный градиент
+✨ Партиклы	Летающие частицы на фоне
+🎮 Робот-персонаж	Анимированный спрайт с репликами
+🏆 Игровые бейджи	Достижения и навыки
+💬 Всплывающие подсказки	Интерактивные элементы
+🏆 Навыки и достижения
+https://img.shields.io/badge/Game_Development-Expert-green?style=flat
+https://img.shields.io/badge/C%2523-Advanced-blue?style=flat
+https://img.shields.io/badge/Python-Advanced-blue?style=flat
+https://img.shields.io/badge/Unity-Expert-green?style=flat
+https://img.shields.io/badge/Django-Intermediate-orange?style=flat
+https://img.shields.io/badge/UI/UX-Intermediate-orange?style=flat
 
-🤖 Kindoson Bot
-Телеграм-бот с полезными функциями.
+📄 Лицензия
+Этот проект является открытым и доступен для изучения и использования в образовательных целях.
 
-https://img.shields.io/badge/%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8C_%D0%B1%D0%BE%D1%82%D0%B0-26A5E4?style=for-the-badge&logo=telegram&logoColor=white
-https://img.shields.io/badge/%D0%9A%D0%BE%D0%B4_%D0%B1%D0%BE%D1%82%D0%B0-181717?style=for-the-badge&logo=github&logoColor=white
+📞 Контакты
+https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white
+https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white
+https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white
+https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white
 
-🧑‍🏫 ITMOUSE — обучение играм
-Я преподаю гейм-дизайн, Unity и Python детям.
+🎮 «Игры — это искусство, а искусство требует страсти»
 
-https://img.shields.io/badge/ITMOUSE-FF6B6B?style=for-the-badge&logo=code&logoColor=white
-
-📈 Статистика
-https://github-readme-stats.vercel.app/api?username=egortestitmouse-pixel&show_icons=true&theme=radical
-https://github-readme-stats.vercel.app/api/top-langs/?username=egortestitmouse-pixel&layout=compact&theme=radical
-
-💬 Контакты
-https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white
-https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white
-https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white
-https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
-
-🏆 Достижения
-https://img.shields.io/badge/Game_Developer-Expert-1dd1a1?style=flat-square
-https://img.shields.io/badge/Python-Advanced-3776AB?style=flat-square
-https://img.shields.io/badge/Django-Intermediate-092E20?style=flat-square
-https://img.shields.io/badge/ITMOUSE_Teacher-2025-feca57?style=flat-square
-
-📝 Лицензия
-Этот репозиторий содержит мои личные проекты.
-Все права защищены. Для использования свяжитесь со мной.
-
-Сделано с ❤️ в Минске 🇧🇾
+— Егор Константинович, Game Developer
